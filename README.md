@@ -16,7 +16,7 @@
 ### Tech stuff 👾:
 - React ⚛️
 - Redux 🔃
-- Redux promise
+- Redux Thunk
 - CSS
 - Jest
 - Enzyme
