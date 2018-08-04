@@ -1,4 +1,4 @@
-# React GitHub Users Search ⚛🐙🔍
+# ⚛ React Awesome Search Box 🔍
 
 ## A React based, interactive, keyboard accessible and well-designed search box.
 
