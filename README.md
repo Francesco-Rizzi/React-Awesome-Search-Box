@@ -2,6 +2,7 @@
 
 ## A React based, interactive, keyboard accessible and well-designed search box.
 
+![React Awesome Search Box](public/assets/og.png?raw=true "React Awesome Search Box")
 
 ### How to run:
 - Install dependencies: `npm i`;
