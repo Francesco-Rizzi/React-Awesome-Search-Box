@@ -23,7 +23,7 @@ export default class App extends Component {
 		return (<div className="app-search" onKeyUp={this.handleKeyboard.bind(this)}>
 			{this.renderError()}
 			<div className="app-search-input-wrapper">
-				<img className='app-search-icon' src={magnifier} />
+				<img className='app-search-icon' src={magnifier} alt='icon'/>
 				<input className='app-search-input' placeholder='Username' type='text' value={this.state.query} onChange={this.handleChange.bind(this)} />
 				<div className="app-search-results-box">
 					{this.renderSearchStatus()}
