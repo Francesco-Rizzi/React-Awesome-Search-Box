@@ -19,7 +19,7 @@ const apiMock = {
 	} ]
 };
 
-it('the header has an h1 and an h2', () =>{
+it('The Header has an h1 and an h2.', () =>{
 	
 	const component = shallow(<Header />);
 	
@@ -27,50 +27,71 @@ it('the header has an h1 and an h2', () =>{
 	expect(component.find('h2')).toHaveLength(1);
 	
 });
-//
-//it('the list handles empty case', () =>{
-//
-//	const component = shallow(<List onToggleBookmark={() =>{
-//	}} heroes={{}} loading={false} />);
-//
-//	expect(component.find('.app-empty')).toHaveLength(1);
-//	expect(component.find('.app-loader')).toHaveLength(0);
-//	expect(component.find('.app-heroes-list')).toHaveLength(0);
-//
-//});
-//
-//
-//it('the list handles loading case', () =>{
-//
-//	const component = shallow(<List onToggleBookmark={() =>{
-//	}} heroes={heroMock} loading={true} />);
-//
-//	expect(component.find('.app-empty')).toHaveLength(0);
-//	expect(component.find('.app-loader')).toHaveLength(1);
-//	expect(component.find('.app-heroes-list')).toHaveLength(0);
-//
-//});
-//
-//it('the list renders the heroes', () =>{
-//
-//	const component = shallow(<List onToggleBookmark={() =>{
-//	}} heroes={heroMock} loading={false} />);
-//
-//	expect(component.find('.app-empty')).toHaveLength(0);
-//	expect(component.find('.app-loader')).toHaveLength(0);
-//	expect(component.find('.app-heroes-list')).toHaveLength(1);
-//	expect(component.find('.app-heroes-list').find(Card)).toHaveLength(1);
-//
-//});
-//
-//it('the card has an image, a name and a bookmarked state', () =>{
-//
-//	const hero      = heroMock[ 1009157 ];
-//	const component = shallow(<Card hero={hero} onToggleBookmark={() =>{
-//	}} />);
-//
-//	expect(component.find('.app-heroes-card-image').prop('style')).toEqual({"backgroundImage" : "url('" + hero.thumbnail.path + "." + hero.thumbnail.extension + "')"});
-//	expect(component.find('.app-heroes-card-title').text()).toEqual(hero.name);
-//	expect(component.find('.app-heroes-card-saved img').prop('src')).toEqual("/bookmarked.svg");
-//
-//});
+
+it('The SearchItem has a URL, and Image and a Name referred to the user.', () =>{
+
+	const user = apiMock['items'][0];
+	
+	const component = shallow(<SearchItem user={user} highlightedByKeyboard={false} highlighted={false} onHover={() => {}} adjustScroll={() => {}} />);
+	
+	expect(component.find('.app-search-item-image').prop('style')).toEqual({"backgroundImage" : "url('" + user.avatar_url + "')"});
+	expect(component.find('.app-search-item-name').text()).toEqual(user.login);
+	expect(component.prop('href')).toEqual(user.html_url);
+
+});
+
+it('The SearchItem displays if it is highlighted or not.', () =>{
+
+	const user = apiMock['items'][0];
+	
+	const component = shallow(<SearchItem user={user} highlightedByKeyboard={false} highlighted={true} onHover={() => {}} adjustScroll={() => {}} />);
+	expect(component.prop('className')).toContain('is-highlighted');
+	
+	component.setProps({highlighted : false});
+	expect(component.prop('className')).not.toContain('is-highlighted');
+
+});
+
+it('The Search handles loading case.', () =>{
+
+	const component = shallow(<Search loading={true} users={[]} />);
+	expect(component.find('.app-search-results-box-info').text()).toContain('Loading');
+	
+});
+
+it('The Search handles no-users-found case.', () =>{
+
+	const component = shallow(<Search loading={false} users={[]} />);
+	expect(component.find('.app-search-results-box-info').text()).toContain('Try typing your username');
+	
+});
+
+it('The Search handles x-users-found case.', () =>{
+
+	const component = shallow(<Search loading={false} users={apiMock.items} />);
+	component.setState({query: 'as'});
+	expect(component.find('.app-search-results-box-info').text()).toContain('2 users');
+	
+});
+
+it('The Search shows the list of users found.', () =>{
+
+	const component = shallow(<Search loading={false} users={apiMock.items} />);
+	component.setState({query: 'as'});
+	expect(component.find('.app-search-results-box-users-wrapper')).toHaveLength(1);
+	expect(component.find(SearchItem)).toHaveLength(2);
+	
+	component.setProps({users : []});
+	expect(component.find('.app-search-results-box-users-wrapper')).toHaveLength(0);
+	expect(component.find(SearchItem)).toHaveLength(0);
+	
+});
+
+it('The Search shows errors.', () =>{
+
+	const component = shallow(<Search loading={false} users={apiMock.items} error="Error!" />);
+	
+	expect(component.find('.app-search-error')).toHaveLength(1);
+	expect(component.find('.app-search-error').text()).toEqual('Error!');
+	
+});
