@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import magnifier from '../assets/magnifier.svg';
-
 import SearchItem from './SearchItem';
 
 export default class App extends Component {
@@ -23,7 +22,7 @@ export default class App extends Component {
 		return (<div className="app-search" onKeyUp={this.handleKeyboard.bind(this)}>
 			{this.renderError()}
 			<div className="app-search-input-wrapper">
-				<img className='app-search-icon' src={magnifier} alt='icon'/>
+				<img className='app-search-icon' src={magnifier} alt='icon' />
 				<input className='app-search-input' placeholder='Username' type='text' value={this.state.query} onChange={this.handleChange.bind(this)} />
 				<div className="app-search-results-box">
 					{this.renderSearchStatus()}
@@ -71,10 +70,10 @@ export default class App extends Component {
 		
 		const searchStatusNodeHeight = this.searchStatusRef.current.offsetHeight;
 		
-		if ( scrollTop > distanceToTop - searchStatusNodeHeight) {
+		if ( scrollTop > distanceToTop - searchStatusNodeHeight ) {
 			//Is above.
 			viewNode.scrollTop = distanceToTop - searchStatusNodeHeight;
-		} else if ( scrollTop < distanceToTop + nodeHeight - viewHeight - searchStatusNodeHeight) {
+		} else if ( scrollTop < distanceToTop + nodeHeight - viewHeight - searchStatusNodeHeight ) {
 			//Is below.
 			viewNode.scrollTop = distanceToTop + nodeHeight - viewHeight - searchStatusNodeHeight;
 		}
