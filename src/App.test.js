@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import Header from './components/header';
+import Header from './components/Header';
 import Search from './components/Search';
 import SearchItem from './components/SearchItem';
 
