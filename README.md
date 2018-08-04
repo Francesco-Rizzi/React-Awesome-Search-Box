@@ -1,6 +1,6 @@
 # React GitHub Users Search ⚛🐙🔍
 
-## Interactively query the GitHub Users API through a React based well-designed search box.
+## A React based, interactive, keyboard accessible and well-designed search box.
 
 
 ### How to run:
