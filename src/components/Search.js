@@ -78,7 +78,6 @@ export default class App extends Component {
 			viewNode.scrollTop = distanceToTop + nodeHeight - viewHeight - searchStatusNodeHeight;
 		}
 		
-		console.log(scrollTop, nodeHeight, distanceToTop);
 	}
 	
 	renderUsersBox(){
