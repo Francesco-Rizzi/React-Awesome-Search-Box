@@ -92,6 +92,7 @@ html, body {
 
 .app-search-input:focus ~ .app-search-results-box, .app-search-results-box:hover {
 	display: block;
+	background: white;
 }
 
 .app-search-results-box-info {
